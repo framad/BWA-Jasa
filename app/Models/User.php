@@ -10,6 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
@@ -19,6 +20,15 @@ class User extends Authenticatable
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
+
+    use SoftDeletes;
+
+    protected $dates = [
+        'updated_at',
+        'created_at',
+        'deleted_at',
+        'email_verified_at'
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -58,4 +68,25 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    //one to one dengan table detail user
+    public function detail_user(){
+        return $this->hasOne('App\Models\DetailUser', 'users_id');
+    }
+
+    //one to many dengan table service
+    public function service(){
+        return $this->hasMany('App\Models\Service', 'users_id');
+    }
+
+    //one to many dengan table order field buyer
+    public function order_buyer(){
+        return $this->hasMany('App\models\Order', 'buyer_id');
+    }
+
+    //one to many dengan table order field freelancer
+    public function order_freelancer(){
+        return $this->hasMany('App\Models\Order', 'freelancer_id');
+    }
 }
