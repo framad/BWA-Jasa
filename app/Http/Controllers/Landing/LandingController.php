@@ -85,15 +85,19 @@ class LandingController extends Controller
 
     //custom
     public function explore(){
-
+        return view("pages.landing.explore");
     }
 
+    //kenapa pake id? karena untuk lihat detail harus jelas tampilan mana yang mau ditampilkan dan itu 
+    //pasti ada id nya
     public function booking($id){
-
+        
     }
-
+    
+    //kenapa pake id? karena untuk lihat detail harus jelas tampilan mana yang mau ditampilkan dan itu 
+    //pasti ada id nya
     public function detail($id){
-
+        return view("pages.landing.detail");
     }
 
     public function detail_booking($id){
