@@ -32,7 +32,7 @@ Route::get('detail_booking/{id}', [LandingController::class, 'detail_booking'])-
 Route::resource('/', LandingController::class);
 
 //bikin route untuk dashboard yang hanya bisa diakses jika sudah login
-Route::group(['prefix' => 'member', 'as' => 'member', 'middleware' => ['auth:sanctum', 'verified']],
+Route::group(['prefix' => 'member', 'as' => 'member.', 'middleware' => ['auth:sanctum', 'verified']],
 function(){
     //dashboard
     Route::resource('dashboard', MemberController::class);
